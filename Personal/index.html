@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .fade-in {
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        #typing-effect {
+            display: inline-block;
+            white-space: nowrap;
+            border-right: 2px solid white;
+            animation: blink 0.7s steps(1) infinite;
+        }
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .bg-animated {
+            background: linear-gradient(-45deg, #1e293b, #1e293b, #1e40af);
+            background-size: 300% 300%;
+            animation: gradientMove 8s ease infinite;
+        }
+        
+        .flip-card {
+            perspective: 1000px;
+            width: 100%;
+            height: 250px;
+        }
+
+        .flip-card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #4a5568;
+        }
+
+        .flip-card-front {
+            background: #1e293b;
+        }
+
+        .flip-card-back {
+            background: #334155;
+            transform: rotateY(180deg);
+            color: white;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <!-- Header -->
+    <header class="shadow-md fixed w-full top-0 z-10 transition-colors duration-300 bg-transparent z-index-100">
+        <div class="container mx-auto flex justify-between items-center py-4 px-6">
+            <h1 class="text-xl font-bold text-white transition-colors duration-300" id="nav-title">Indra<span class="text-cyan-400"> Kurniawan</span></h1>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#about" class="text-white hover:text-cyan-400 font-bold transition-colors duration-300 nav-link">About</a>
+                <a href="#projects" class="text-white hover:text-cyan-400 font-bold transition-colors duration-300 nav-link">Projects</a>
+                <a href="#contact" class="text-white hover:text-cyan-400 font-bold transition-colors duration-300 nav-link">Contact</a>
+            </nav>
+            <button id="menu-btn" class="md:hidden text-white focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#about" class="block py-2 px-6 text-white hover:bg-gray-100 font-bold nav-link">About</a>
+            <a href="#projects" class="block py-2 px-6 text-white hover:bg-gray-100 font-bold nav-link">Projects</a>
+            <a href="#contact" class="block py-2 px-6 text-white hover:bg-gray-100 font-bold nav-link">Contact</a>
+        </div>
+    </header>
+    
+
+<!-- Hero Section -->
+<section class="relative min-h-screen bg-animated text-white overflow-hidden" id="hero">
+    <!-- Pentagon Network Animation Layer -->
+    <div class="absolute inset-0 z-0">
+        <div id="network-animation" class="absolute inset-0 w-full h-full opacity-30"></div>
+    </div>
+    
+    <!-- Left side social icons -->
+    <div class="fixed left-8 top-1/2 transform -translate-y-1/2 flex flex-col space-y-6 z-50">
+        <a href="https://www.instagram.com/indrakrnia1/" class="text-gray-400 hover:text-white transition-colors">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.36 3.608 1.335.975.975 1.273 2.242 1.335 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.36 2.633-1.335 3.608-.975.975-2.242 1.273-3.608 1.335-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.36-3.608-1.335-.975-.975-1.273-2.242-1.335-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.36-2.633 1.335-3.608.975-.975 2.242-1.273 3.608-1.335 1.266-.058 1.646-.07 4.85-.07zM12 0C8.741 0 8.333.014 7.053.072 5.38.134 4.142.428 3.057 1.513 1.972 2.598 1.678 3.836 1.616 5.509 1.558 6.79 1.544 7.197 1.544 10.456s.014 3.667.072 4.947c.062 1.673.356 2.911 1.441 3.996 1.085 1.085 2.323 1.379 3.996 1.441 1.28.058 1.689.072 4.947.072s3.667-.014 4.947-.072c1.673-.062 2.911-.356 3.996-1.441 1.085-1.085 1.379-2.323 1.441-3.996.058-1.28.072-1.689.072-4.947s-.014-3.667-.072-4.947c-.062-1.673-.356-2.911-1.441-3.996-1.085-1.085-2.323-1.379-3.996-1.441C15.667.014 15.26 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+            </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/indra-kurniawan-bb8531304/" class="text-gray-400 hover:text-white transition-colors">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452H17.13v-5.396c0-1.285-.025-2.933-1.785-2.933-1.785 0-2.057 1.397-2.057 2.835v5.493H9.842V8.79h3.183v1.582h.045c.443-.842 1.526-1.733 3.145-1.733 3.36 0 3.984 2.213 3.984 5.087v6.725zM5.337 7.433c-1.062 0-1.922-.86-1.922-1.922s.86-1.922 1.922-1.922 1.922.86 1.922 1.922-.86 1.922-1.922 1.922zM6.859 20.452H3.816V8.79h3.043v11.662zM22.225 0H1.771C.791 0 0 .773 0 1.729v20.543C0 23.226.791 24 1.771 24h20.451c.98 0 1.778-.774 1.778-1.728V1.729C24 .773 23.205 0 22.225 0z"/>
+            </svg>
+        </a>
+        <a href="https://github.com/indraKurniawan555" class="text-gray-400 hover:text-white transition-colors">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577v-2.234c-3.338.724-4.042-1.415-4.042-1.415-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.304.762-1.605-2.665-.306-5.466-1.333-5.466-5.93 0-1.31.47-2.382 1.235-3.222-.123-.305-.535-1.54.117-3.216 0 0 1.008-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.29-1.552 3.297-1.23 3.297-1.23.653 1.676.241 2.91.118 3.216.767.84 1.233 1.912 1.233 3.222 0 4.61-2.804 5.62-5.475 5.92.43.372.823 1.102.823 2.222v3.293c0 .322.218.694.825.577C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12z"/>
+            </svg>
+        </a>
+    </div>
+    
+    <!-- Main content -->
+    <div class="container mx-auto px-6 sm:px-8 min-h-screen flex items-center relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <!-- Left content -->   
+            <div class="space-y-4 sm:space-y-6">
+                <h1 class="text-xl sm:text-2xl">
+                    Hi! I Am <span class="text-cyan-400">Indra Kurniawan</span>
+                </h1>
+                <h2 class="text-4xl sm:text-6xl font-bold text-cyan-400" id="typing-effect">
+                    Web Developer
+                </h2>
+                <p class="text-gray-300 max-w-lg text-sm sm:text-base">
+                    Hello, I'm a web developer and interested in machine learning and Artificial Intelligence.
+                </p>
+                <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+                    <a href="#" class="bg-cyan-400 text-black px-4 sm:px-6 py-2 sm:py-3 rounded hover:bg-cyan-300 transition-colors">
+                        Download CV
+                    </a>
+                    <a href="#projects" class="border border-cyan-400 text-cyan-400 px-4 sm:px-6 py-2 sm:py-3 rounded hover:bg-cyan-400 hover:text-black transition-colors">
+                        View Project
+                    </a>
+                </div>
+            </div>
+    
+            <!-- Right content - Profile image with glow effect -->
+            <div class="relative">
+                <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 mx-auto">
+                    <div class="absolute inset-0 rounded-full bg-cyan-400/20 blur-lg lg:blur-xl"></div>
+                    <div class="absolute inset-0 rounded-full border-2 border-cyan-400"></div>
+                    <img 
+                        src="Assets/Fotoku2.png" 
+                        alt="Profile Picture" 
+                        class="absolute inset-0 w-full h-full object-cover rounded-full"
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript for Pentagon Network Animation -->
+<script>
+    // Create the network animation when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        const networkCanvas = document.getElementById('network-animation');
+        
+        // Create canvas element
+        const canvas = document.createElement('canvas');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        canvas.style.display = 'block';
+        networkCanvas.appendChild(canvas);
+        
+        const ctx = canvas.getContext('2d');
+        
+        // Set up the pentagon network
+        const particles = [];
+        const particleCount = 200; // Significantly increased from 80
+        const connectionDistance = 160; // Slightly increased from 150
+        const colors = ['rgba(6, 182, 212, 0.5)', 'rgba(20, 184, 166, 0.3)', 'rgba(255, 255, 255, 0.2)'];
+        
+        // Create particles
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2 + 1,
+                speedX: (Math.random() - 0.5) * 0.4,
+                speedY: (Math.random() - 0.5) * 0.4,
+                color: colors[Math.floor(Math.random() * colors.length)]
+            });
+        }
+        
+        // Animation function
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw connections first (behind particles)
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                
+                // Connect particles that are close enough (pentagon-like connections)
+                let connections = 0;
+                for (let j = 0; j < particles.length; j++) {
+                    if (i === j) continue;
+                    
+                    const p2 = particles[j];
+                    const dx = p.x - p2.x;
+                    const dy = p.y - p2.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    // Limit to 5 connections at most to create pentagon-like structures
+                    if (distance < connectionDistance && connections < 5) {
+                        connections++;
+                        ctx.strokeStyle = `rgba(6, 182, 212, ${0.15 * (1 - distance / connectionDistance)})`;
+                        ctx.lineWidth = 0.8 * (1 - distance / connectionDistance);
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            // Update and draw particles
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                
+                // Move particles
+                p.x += p.speedX;
+                p.y += p.speedY;
+                
+                // Bounce off edges
+                if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+                
+                // Draw particle
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        // Start animation
+        animate();
+        
+        // Resize canvas when window size changes
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    });
+</script>
+    
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-slate-900 text-white">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="bubble bg-cyan-400 opacity-20 w-32 h-32 rounded-full absolute top-10 left-10 blur-3xl"></div>
+            <div class="bubble bg-purple-500 opacity-20 w-40 h-40 rounded-full absolute bottom-20 right-16 blur-3xl"></div>
+            <div class="bubble bg-blue-400 opacity-20 w-24 h-24 rounded-full absolute top-1/3 left-1/2 transform -translate-x-1/2 blur-3xl"></div>
+            <div class="bubble bg-green-400 opacity-20 w-28 h-28 rounded-full absolute bottom-10 left-1/3 blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Section Kiri: About Me -->
+            <div class="bg-slate-800 shadow-lg rounded-2xl p-8 border border-gray-700 hover:border-cyan-400 transition-all animate-fade-in-up">
+                <h3 class="text-4xl font-bold text-white">👨‍💻 About Me</h3>
+                <p class="text-lg text-gray-300 mt-3">
+                    Passionate about crafting digital experiences that are functional, aesthetic, and impactful.
+                </p>
+
+                <!-- Biodata -->
+                <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="flex items-center space-x-3 p-4 bg-slate-700 rounded-lg shadow-sm hover:shadow-md transition">
+                        <span class="text-cyan-400 text-2xl">🎂</span>
+                        <p class="text-gray-300"><strong class="text-cyan-400">Birthdate:</strong> December 04, 2003</p>
+                    </div>
+                    <div class="flex items-center space-x-3 p-4 bg-slate-700 rounded-lg shadow-sm hover:shadow-md transition">
+                        <span class="text-cyan-400 text-2xl">📍</span>
+                        <p class="text-gray-300"><strong class="text-cyan-400">Location:</strong> Trenggalek, Indonesia</p>
+                    </div>
+                    <div class="flex items-center space-x-3 p-4 bg-slate-700 rounded-lg shadow-sm hover:shadow-md transition">
+                        <span class="text-cyan-400 text-2xl">✉️</span>
+                        <p class="text-gray-300"><strong class="text-cyan-400">Email:</strong> indrasaya520<br>@gmail.com</p>
+                    </div>
+                    <div class="flex items-center space-x-3 p-4 bg-slate-700 rounded-lg shadow-sm hover:shadow-md transition">
+                        <span class="text-cyan-400 text-2xl">📞</span>
+                        <p class="text-gray-300"><strong class="text-cyan-400">Phone:</strong> +62 852 5743 3490</p>
+                    </div>
+                </div>
+
+                <!-- Career Highlights -->
+                <div class="mt-8">
+                    <h5 class="text-xl font-semibold text-white">🚀 Career Highlights:</h5>
+                    <ul class="mt-3 space-y-3">
+                        <li class="flex items-center space-x-3 p-4 bg-slate-700 rounded-lg shadow-sm hover:shadow-md transition">
+                            <span class="text-cyan-400 text-2xl">🎓</span>
+                            <p class="text-gray-300">Bachelor's Degree in Information Systems, Universitas Trunojoyo Madura<br>2022 - Present</p>
+                        </li>
+                        <li class="flex items-center space-x-3 p-4 bg-slate-700 rounded-lg shadow-sm hover:shadow-md transition">
+                            <span class="text-cyan-400 text-2xl">💻</span>
+                            <p class="text-gray-300">High School Diploma in Natural Science, SMAN 1 Karangan<br>2019 - 2022</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Button -->
+                <div class="text-center mt-8">
+                    <a href="https://api.whatsapp.com/send/?phone=6285257433490&text&type=phone_number&app_absent=0" 
+                    class="inline-block bg-cyan-400 text-black text-lg font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-cyan-300 transition-transform transform hover:scale-105">
+                        📩 Contact Me
+                    </a>
+                </div>
+            </div>
+
+            <!-- Section Kanan: Pengalaman -->
+            <div class="relative bg-slate-800 shadow-lg rounded-2xl p-8 border border-gray-700 hover:border-cyan-400 transition-all animate-fade-in-up">
+                <h3 class="text-4xl font-bold text-white">📈 Experience</h3>
+                <p class="text-lg text-gray-300 mt-3">
+                    A journey of learning, building, and growing in the tech world.
+                </p>
+
+                <!-- Timeline Pengalaman -->
+                <div class="mt-8 relative">
+                    <div class="border-l-4 border-cyan-400 absolute left-5 h-full"></div>
+                    <ul class="space-y-6">
+                        <li class="relative pl-12 flex items-center">
+                            <span class="absolute left-0 top-1/2 transform -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-cyan-400 text-black rounded-full shadow-lg">
+                                💻
+                            </span>
+                            <div class="">
+                                <h4 class="text-lg font-semibold text-white">Web Developer Intern</h4>
+                                <p class="text-gray-300">CV. Besar Anugrah Djaya IT Consultant</p>
+                                <p class="text-gray-300">February 2025 - Present</p>
+                            </div>
+                        </li>
+                        <li class="relative pl-12 flex items-center">
+                            <span class="absolute left-0 top-1/2 transform -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-cyan-400 text-black rounded-full shadow-lg">
+                                📊
+                            </span>
+                            <div class="">
+                                <h4 class="text-lg font-semibold text-white">Business Analyst Intern</h4>
+                                <p class="text-gray-300">Dinas Kominfo Kota Kediri</p>
+                                <p class="text-gray-300">January 2025 - February 2025</p>
+                            </div>
+                        </li>
+                        <li class="relative pl-12 flex items-center">
+                            <span class="absolute left-0 top-1/2 transform -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-cyan-400 text-black rounded-full shadow-lg">
+                                🔬
+                            </span>
+                            <div class="">
+                                <h4 class="text-lg font-semibold text-white">Research and Development Division</h4>
+                                <p class="text-gray-300">UKMFT-ITC</p>
+                                <p class="text-gray-300">January 2024 - Desember 2024</p>
+                            </div>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+
+    <!-- My Skills Section -->
+    <section id="skills" class="py-20 bg-slate-900 relative overflow-hidden">
+        <!-- Background Animation Elements -->
+        <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
+            <div class="absolute top-10 left-10 w-20 h-20 rounded-full bg-cyan-500/10 animate-pulse"></div>
+            <div class="absolute bottom-10 right-10 w-32 h-32 rounded-full bg-blue-500/10 animate-pulse" style="animation-delay: 1s;"></div>
+            <div class="absolute top-1/3 right-1/4 w-16 h-16 rounded-full bg-indigo-500/10 animate-pulse" style="animation-delay: 0.5s;"></div>
+        </div>
+    
+        <div class="container mx-auto px-6 relative">
+            <!-- Title with animated underline -->
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-cyan-400 inline-block relative group">
+                    My Skills
+                    <span class="absolute bottom-0 left-0 w-0 h-1 bg-cyan-400 transition-all duration-1000 group-hover:w-full"></span>
+                </h3>
+            </div>
+    
+            <!-- Slider Navigation Controls -->
+            <div class="flex justify-center mb-6">
+                <button id="prev-slide" class="px-4 py-2 bg-slate-800 text-cyan-400 rounded-l-lg hover:bg-slate-700 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button id="next-slide" class="px-4 py-2 bg-slate-800 text-cyan-400 rounded-r-lg hover:bg-slate-700 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+    
+            <!-- Skills Slider Container -->
+            <div class="relative overflow-hidden">
+                <div id="skills-slider" class="flex transition-transform duration-500 ease-in-out">
+                    <!-- HTML Skill Item -->
+                    <div class="skill-card min-w-[280px] mx-2 bg-slate-800 shadow-lg rounded-lg p-6 text-center cursor-pointer border border-gray-700 hover:border-cyan-400 transition-transform duration-300 relative">
+                        <div class="flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" class="w-16 h-16 opacity-80 transition-opacity hover:opacity-100">
+                        </div>
+                        <h4 class="mt-4 text-xl font-bold text-cyan-400">HTML</h4>
+    
+                        <!-- Hidden Description -->
+                        <div class="hidden-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0">
+                            <p class="mt-4 text-gray-300 text-sm">HTML is a markup language used to structure web pages.</p>
+                        </div>
+                    </div>
+    
+                    <!-- CSS Skill Item -->
+                    <div class="skill-card min-w-[280px] mx-2 bg-slate-800 shadow-lg rounded-lg p-6 text-center cursor-pointer border border-gray-700 hover:border-cyan-400 transition-transform duration-300 relative">
+                        <div class="flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" class="w-16 h-16 opacity-80 transition-opacity hover:opacity-100">
+                        </div>
+                        <h4 class="mt-4 text-xl font-bold text-cyan-400">CSS</h4>
+    
+                        <!-- Hidden Description -->
+                        <div class="hidden-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0">
+                            <p class="mt-4 text-gray-300 text-sm">CSS is used to style and design web pages.</p>
+                        </div>
+                    </div>
+    
+                    <!-- PHP Skill Item -->
+                    <div class="skill-card min-w-[280px] mx-2 bg-slate-800 shadow-lg rounded-lg p-6 text-center cursor-pointer border border-gray-700 hover:border-cyan-400 transition-transform duration-300 relative">
+                        <div class="flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" class="w-16 h-16 opacity-80 transition-opacity hover:opacity-100">
+                        </div>
+                        <h4 class="mt-4 text-xl font-bold text-cyan-400">PHP</h4>
+    
+                        <!-- Hidden Description -->
+                        <div class="hidden-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0">
+                            <p class="mt-4 text-gray-300 text-sm">PHP is a programming language for dynamic web development.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Python Skill Item -->
+                    <div class="skill-card min-w-[280px] mx-2 bg-slate-800 shadow-lg rounded-lg p-6 text-center cursor-pointer border border-gray-700 hover:border-cyan-400 transition-transform duration-300 relative">
+                        <div class="flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-16 h-16 opacity-80 transition-opacity hover:opacity-100">
+                        </div>
+                        <h4 class="mt-4 text-xl font-bold text-cyan-400">Python</h4>
+    
+                        <!-- Hidden Description -->
+                        <div class="hidden-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0">
+                            <p class="mt-4 text-gray-300 text-sm">Python is a popular programming language for various applications, including web and data science.</p>
+                        </div>
+                    </div>
+    
+                    <!-- MySQL Skill Item -->
+                    <div class="skill-card min-w-[280px] mx-2 bg-slate-800 shadow-lg rounded-lg p-6 text-center cursor-pointer border border-gray-700 hover:border-cyan-400 transition-transform duration-300 relative">
+                        <div class="flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="w-16 h-16 opacity-80 transition-opacity hover:opacity-100">
+                        </div>
+                        <h4 class="mt-4 text-xl font-bold text-cyan-400">MySQL</h4>
+    
+                        <!-- Hidden Description -->
+                        <div class="hidden-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0">
+                            <p class="mt-4 text-gray-300 text-sm">MySQL is an open-source relational database management system.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Laravel Skill Item -->
+                    <div class="skill-card min-w-[280px] mx-2 bg-slate-800 shadow-lg rounded-lg p-6 text-center cursor-pointer border border-gray-700 hover:border-cyan-400 transition-transform duration-300 relative">
+                        <div class="flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/laravel.svg" 
+                            alt="Laravel" 
+                            class="w-16 h-16 opacity-80 transition-opacity hover:opacity-100"
+                            style="filter: invert(17%) sepia(98%) saturate(7456%) hue-rotate(355deg) brightness(99%) contrast(104%);">
+                        </div>
+                        <h4 class="mt-4 text-xl font-bold text-cyan-400">Laravel</h4>
+    
+                        <!-- Hidden Description -->
+                        <div class="hidden-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0">
+                            <p class="mt-4 text-gray-300 text-sm">Laravel is a PHP framework for building modern web applications.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- WordPress Skill Item -->
+                    <div class="skill-card min-w-[280px] mx-2 bg-slate-800 shadow-lg rounded-lg p-6 text-center cursor-pointer border border-gray-700 hover:border-cyan-400 transition-transform duration-300 relative">
+                        <div class="flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg" 
+                            alt="WordPress" 
+                            class="w-16 h-16 opacity-100 transition-opacity hover:opacity-100"
+                            style="filter: invert(1);">
+                        </div>
+                        <h4 class="mt-4 text-xl font-bold text-cyan-400">WordPress</h4>
+    
+                        <!-- Hidden Description -->
+                        <div class="hidden-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0">
+                            <p class="mt-4 text-gray-300 text-sm">WordPress is a popular CMS for building websites and blogs.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Elementor Skill Item -->
+                    <div class="skill-card min-w-[280px] mx-2 bg-slate-800 shadow-lg rounded-lg p-6 text-center cursor-pointer border border-gray-700 hover:border-cyan-400 transition-transform duration-300 relative">
+                        <div class="flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/elementor.svg" 
+                            alt="Elementor" 
+                            class="w-16 h-16 opacity-80 transition-opacity hover:opacity-100"
+                            style="filter: invert(1);">
+                        </div>
+                        <h4 class="mt-4 text-xl font-bold text-cyan-400">Elementor</h4>
+    
+                        <!-- Hidden Description -->
+                        <div class="hidden-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0">
+                            <p class="mt-4 text-gray-300 text-sm">Elementor is a page builder plugin for WordPress that enables drag-and-drop website design.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- SEO Optimization Skill Item -->
+                    <div class="skill-card min-w-[280px] mx-2 bg-slate-800 shadow-lg rounded-lg p-6 text-center cursor-pointer border border-gray-700 hover:border-cyan-400 transition-transform duration-300 relative">
+                        <div class="flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/google.svg" 
+                            alt="SEO Optimization" 
+                            class="w-16 h-16 opacity-80 transition-opacity hover:opacity-100"
+                            style="filter: invert(1);">
+                        </div>
+                        <h4 class="mt-4 text-xl font-bold text-cyan-400">SEO Optimization</h4>
+    
+                        <!-- Hidden Description -->
+                        <div class="hidden-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0">
+                            <p class="mt-4 text-gray-300 text-sm">SEO Optimization improves website visibility and ranking in search engines.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Figma Skill Item -->
+                    <div class="skill-card min-w-[280px] mx-2 bg-slate-800 shadow-lg rounded-lg p-6 text-center cursor-pointer border border-gray-700 hover:border-cyan-400 transition-transform duration-300 relative">
+                        <div class="flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/figma.svg" 
+                            alt="Figma" 
+                            class="w-16 h-16 opacity-80 transition-opacity hover:opacity-100"
+                            style="filter: invert(1);">
+                        </div>
+                        <h4 class="mt-4 text-xl font-bold text-cyan-400">Figma</h4>
+    
+                        <!-- Hidden Description -->
+                        <div class="hidden-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0">
+                            <p class="mt-4 text-gray-300 text-sm">Figma is a collaborative UI/UX design tool for prototyping and design systems.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Word Skill Item -->
+                    <div class="skill-card min-w-[280px] mx-2 bg-slate-800 shadow-lg rounded-lg p-6 text-center cursor-pointer border border-gray-700 hover:border-cyan-400 transition-transform duration-300 relative">
+                        <div class="flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoftword.svg" 
+                            alt="Microsoft Word" 
+                            class="w-16 h-16 opacity-80 transition-opacity hover:opacity-100"
+                            style="filter: invert(1);">
+                        </div>
+                        <h4 class="mt-4 text-xl font-bold text-cyan-400">Microsoft Word</h4>
+    
+                        <!-- Hidden Description -->
+                        <div class="hidden-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0">
+                            <p class="mt-4 text-gray-300 text-sm">Microsoft Word is a document processing software used for creating, editing, and formatting text documents.</p>
+                        </div>
+                    </div>
+    
+                    <!-- Excel Skill Item -->
+                    <div class="skill-card min-w-[280px] mx-2 bg-slate-800 shadow-lg rounded-lg p-6 text-center cursor-pointer border border-gray-700 hover:border-cyan-400 transition-transform duration-300 relative">
+                        <div class="flex items-center justify-center">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoftexcel.svg" 
+                            alt="Microsoft Excel" 
+                            class="w-16 h-16 opacity-80 transition-opacity hover:opacity-100"
+                            style="filter: invert(1);">
+                        </div>
+                        <h4 class="mt-4 text-xl font-bold text-cyan-400">Microsoft Excel</h4>
+    
+                        <!-- Hidden Description -->
+                        <div class="hidden-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out opacity-0">
+                            <p class="mt-4 text-gray-300 text-sm">Microsoft Excel is a powerful spreadsheet application used for data analysis, calculations, and visualization.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Pagination Dots -->
+            <div class="flex justify-center mt-6" id="pagination-dots">
+                <!-- Dots will be dynamically generated here -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- JavaScript for Slide Effect and Slider Functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Variables for slider
+            const slider = document.getElementById('skills-slider');
+            const prevButton = document.getElementById('prev-slide');
+            const nextButton = document.getElementById('next-slide');
+            const cards = document.querySelectorAll('.skill-card');
+            const paginationContainer = document.getElementById('pagination-dots');
+            
+            // Calculate how many cards to show based on screen width
+            const calculateVisibleCards = () => {
+                if (window.innerWidth < 640) return 1;
+                if (window.innerWidth < 1024) return 2;
+                return 4;
+            };
+            
+            let visibleCards = calculateVisibleCards();
+            let currentIndex = 0;
+            let totalSlides = Math.ceil(cards.length / visibleCards);
+            
+            // Initialize pagination dots
+            const createPaginationDots = () => {
+                paginationContainer.innerHTML = '';
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.createElement('button');
+                    dot.classList.add('w-3', 'h-3', 'mx-1', 'rounded-full', 'bg-slate-700', 'focus:outline-none');
+                    if (i === currentIndex) {
+                        dot.classList.add('bg-cyan-400');
+                    }
+                    dot.addEventListener('click', () => goToSlide(i));
+                    paginationContainer.appendChild(dot);
+                }
+            };
+            
+            // Set initial width based on visible cards
+            const updateCardWidth = () => {
+                const containerWidth = slider.parentElement.clientWidth;
+                const cardWidth = (containerWidth / visibleCards) - 16; // Subtract margin
+                cards.forEach(card => {
+                    card.style.minWidth = `${cardWidth}px`;
+                });
+            };
+            
+            // Update slider position
+            const updateSliderPosition = () => {
+                const cardWidth = cards[0].offsetWidth + 16; // Width + margin
+                slider.style.transform = `translateX(-${currentIndex * cardWidth * visibleCards}px)`;
+                
+                // Update pagination dots
+                const dots = paginationContainer.querySelectorAll('button');
+                dots.forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.add('bg-cyan-400');
+                        dot.classList.remove('bg-slate-700');
+                    } else {
+                        dot.classList.add('bg-slate-700');
+                        dot.classList.remove('bg-cyan-400');
+                    }
+                });
+                
+                // Update button states
+                prevButton.disabled = currentIndex === 0;
+                prevButton.style.opacity = currentIndex === 0 ? '0.5' : '1';
+                nextButton.disabled = currentIndex === totalSlides - 1;
+                nextButton.style.opacity = currentIndex === totalSlides - 1 ? '0.5' : '1';
+            };
+            
+            // Go to specific slide
+            const goToSlide = (index) => {
+                currentIndex = index;
+                updateSliderPosition();
+            };
+            
+            // Event listeners for buttons
+            prevButton.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateSliderPosition();
+                }
+            });
+            
+            nextButton.addEventListener('click', () => {
+                if (currentIndex < totalSlides - 1) {
+                    currentIndex++;
+                    updateSliderPosition();
+                }
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                const newVisibleCards = calculateVisibleCards();
+                if (newVisibleCards !== visibleCards) {
+                    visibleCards = newVisibleCards;
+                    totalSlides = Math.ceil(cards.length / visibleCards);
+                    currentIndex = Math.min(currentIndex, totalSlides - 1);
+                    createPaginationDots();
+                }
+                updateCardWidth();
+                updateSliderPosition();
+            });
+            
+            // Skill card expand/collapse functionality
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const content = card.querySelector('.hidden-content');
+                    
+                    document.querySelectorAll('.hidden-content').forEach(div => {
+                        if (div !== content) {
+                            div.style.maxHeight = '0px';
+                            div.style.opacity = '0';
+                        }
+                    });
+                    
+                    if (content.style.maxHeight === '0px' || content.style.maxHeight === '') {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        content.style.opacity = '1';
+                    } else {
+                        content.style.maxHeight = '0px';
+                        content.style.opacity = '0';
+                    }
+                });
+            });
+            
+            // Touch swipe functionality
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            slider.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+            
+            slider.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+            
+            const handleSwipe = () => {
+                if (touchEndX < touchStartX && currentIndex < totalSlides - 1) {
+                    // Swipe left
+                    currentIndex++;
+                    updateSliderPosition();
+                } else if (touchEndX > touchStartX && currentIndex > 0) {
+                    // Swipe right
+                    currentIndex--;
+                    updateSliderPosition();
+                }
+            };
+            
+            // Initialize
+            updateCardWidth();
+            createPaginationDots();
+            updateSliderPosition();
+        });
+    </script>
+
+
+
+
+    <!-- Section Sertifikasi -->
+    <section id="certifications" class="py-20 bg-slate-800 text-white relative overflow-hidden">
+        <!-- Bubble Effect -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-10 right-1/3 w-20 h-20 rounded-full bg-cyan-500/10 animate-pulse"></div>
+            <div class="absolute bottom-10 left-10 w-32 h-32 rounded-full bg-blue-500/10 animate-pulse" style="animation-delay: 1s;"></div>
+            <div class="absolute top-1/2 left-1/4 w-16 h-16 rounded-full bg-indigo-500/10 animate-pulse" style="animation-delay: 0.5s;"></div>
+        </div>
+
+
+        <div class="container mx-auto px-6 relative">
+            <h3 class="text-4xl font-bold text-center text-cyan-400">Certifications</h3>
+            <p class="text-center text-gray-300 mt-4 max-w-2xl mx-auto">
+                Achievements and recognitions that showcase my commitment to professional growth.
+            </p>
+            <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Sertifikat 1 -->
+                <div class="flip-card mb-16 sm:mb-0">
+                    <div class="flip-card-inner">
+                        <!-- Front Side -->
+                        <div class="flip-card-front bg-slate-700 p-8 shadow-lg rounded-lg text-center border border-gray-600 hover:border-cyan-400 transition-all">
+                            <img src="Assets/certificate-DQLABFREECLASS01QNHIPR_page-0001.jpg" alt="Data Science Fundamental" class="w-full h-48 object-contain mx-auto mb-6">
+                            <h4 class="text-xl font-semibold text-cyan-400">Freeclass: Data Science Fundamental</h4>
+                            <p class="text-gray-300 mt-2">Issued by DQLab</p>
+                        </div>
+                        <!-- Back Side -->
+                        <div class="flip-card-back bg-slate-700 p-8 shadow-lg rounded-lg text-center border border-cyan-400">
+                            <h4 class="text-xl font-semibold text-cyan-400">Data Science Fundamental</h4>
+                            <p class="text-gray-300 mt-3 text-sm">
+                                Covers basic data science concepts including data processing, visualization, and modeling.
+                            </p>
+                            <p class="text-gray-400 text-sm mt-2">Issued: April 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sertifikat 2 -->
+                <div class="flip-card mb-16 sm:mb-0">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-slate-700 p-8 shadow-lg rounded-lg text-center border border-gray-600 hover:border-cyan-400 transition-all">
+                            <img src="Assets/certificate-DQLABINTP1AJTADC_page-0001.jpg" alt="Python Fundamental" class="w-full h-48 object-contain mx-auto mb-6">
+                            <h4 class="text-xl font-semibold text-cyan-400">Python Fundamental for Data Science</h4>
+                            <p class="text-gray-300 mt-2">Issued by DQLab</p>
+                        </div>
+                        <div class="flip-card-back bg-slate-700 p-8 shadow-lg rounded-lg text-center border border-cyan-400">
+                            <h4 class="text-xl font-semibold text-cyan-400">Python for Data Science</h4>
+                            <p class="text-gray-300 mt-3 text-sm">
+                                Learn Python programming for data analysis, visualization, and machine learning.
+                            </p>
+                            <p class="text-gray-400 text-sm mt-2">Issued: April 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sertifikat 3 -->
+                <div class="flip-card mb-16 sm:mb-0">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-slate-700 p-8 shadow-lg rounded-lg text-center border border-gray-600 hover:border-cyan-400 transition-all">
+                            <img src="Assets/certificate-DQLABSQLT1WHPRVL_page-0001.jpg" alt="SQL Fundamentals" class="w-full h-48 object-contain mx-auto mb-6">
+                            <h4 class="text-xl font-semibold text-cyan-400">Fundamental SQL Using SELECT Statement</h4>
+                            <p class="text-gray-300 mt-2">Issued by DQLab</p>
+                        </div>
+                        <div class="flip-card-back bg-slate-700 p-8 shadow-lg rounded-lg text-center border border-cyan-400">
+                            <h4 class="text-xl font-semibold text-cyan-400">SQL Fundamentals</h4>
+                            <p class="text-gray-300 mt-3 text-sm">
+                                Learn to use SQL queries to manage and analyze structured data.
+                            </p>
+                            <p class="text-gray-400 text-sm mt-2">Issued: April 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sertifikat 4 -->
+                <div class="flip-card mb-16 sm:mb-0">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-slate-700 p-8 shadow-lg rounded-lg text-center border border-gray-600 hover:border-cyan-400 transition-all">
+                            <img src="Assets/sertif.jpg" alt="R Fundamentals" class="w-full h-48 object-contain mx-auto mb-6">
+                            <h4 class="text-xl font-semibold text-cyan-400">R Fundamental For Data Science</h4>
+                            <p class="text-gray-300 mt-2">Issued by DQLab</p>
+                        </div>
+                        <div class="flip-card-back bg-slate-700 p-8 shadow-lg rounded-lg text-center border border-cyan-400">
+                            <h4 class="text-xl font-semibold text-cyan-400">R Fundamentals</h4>
+                            <p class="text-gray-300 mt-3 text-sm">
+                                Learn the fundamentals of R programming for data science, including data manipulation, visualization, and statistical analysis.
+                            </p>
+                            <p class="text-gray-400 text-sm mt-2">Issued: April 2024</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sertifikat 5 -->
+                <div class="flip-card mb-16 sm:mb-0">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-slate-700 p-8 shadow-lg rounded-lg text-center border border-gray-600 hover:border-cyan-400 transition-all">
+                            <img src="Assets/INDRA KURNIAWAN_page-0001.jpg" alt="Mobile programming" class="w-full h-48 object-contain mx-auto mb-6">
+                            <h4 class="text-xl font-semibold text-cyan-400">Mobile Programming With Kotlin</h4>
+                            <p class="text-gray-300 mt-2">Issued by GDSC Trunojoyo</p>
+                        </div>
+                        <div class="flip-card-back bg-slate-700 p-8 shadow-lg rounded-lg text-center border border-cyan-400">
+                            <h4 class="text-xl font-semibold text-cyan-400">Mobile Programming With Kotlin</h4>
+                            <p class="text-gray-300 mt-3 text-sm">
+                                Learn the fundamentals of mobile application development using Kotlin, including UI design, data management, and Jetpack Compose.
+                            </p>
+                            <p class="text-gray-400 text-sm mt-2">Issued: November 2023</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sertifikat 6 -->
+                <div class="flip-card mb-16 sm:mb-0">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-slate-700 p-8 shadow-lg rounded-lg text-center border border-gray-600 hover:border-cyan-400 transition-all">
+                            <img src="Assets/SERTIFIKAT - Indra Kurniawan_page-0001.jpg" alt="Mobile programming" class="w-full h-48 object-contain mx-auto mb-6">
+                            <h4 class="text-xl font-semibold text-cyan-400">Mobile Programming With Kotlin</h4>
+                            <p class="text-gray-300 mt-2">Issued by UKMFT-ITC</p>
+                        </div>
+                        <div class="flip-card-back bg-slate-700 p-8 shadow-lg rounded-lg text-center border border-cyan-400">
+                            <h4 class="text-xl font-semibold text-cyan-400">Mobile Programming With Kotlin</h4>
+                            <p class="text-gray-300 mt-3 text-sm">
+                                Learn the fundamentals of mobile application development using Kotlin, covering UI design, data management, Jetpack Compose, API integration, and SQLite for data storage.
+                            </p>
+                            <p class="text-gray-400 text-sm mt-2">Issued: November 2023</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+<!-- Projects Section -->
+<section id="projects" class="bg-slate-900 py-20 relative z-0">
+    <!-- Background Effect - Animated Gradient -->
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 opacity-40 overflow-hidden z-0">
+        <div class="absolute w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMDIwMzAiIGZpbGwtb3BhY2l0eT0iMC40Ij48cGF0aCBkPSJNMzYgMzRoLTJ2LTRoMnY0em0wLTZoLTJ2LTRoMnY0em0wLTZoLTJ2LTRoMnY0em0wLTZoLTJWNmgydjR6bTAtNmgtMlYwaDJ2NHptLTYgMTJoLTJ2LTRoMnY0em0wIDEyaC0ydi00aDJ2NHptMC02aC0ydi00aDJ2NHptMC02aC0ydi00aDJ2NHptMC02aC0yVjBoMnY0eiIvPjwvZz48L2c+PC9zdmc+')] opacity-5"></div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-1">
+        <!-- Title with animated underline -->
+        <div class="text-center mb-16">
+            <h3 class="text-4xl font-bold text-white inline-block relative">
+                My <span class="text-cyan-400">Projects</span>
+                <span class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-blue-500 transform scale-x-0 transition-transform duration-700 group-hover:scale-x-100"></span>
+            </h3>
+            <div class="h-1 w-24 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mt-2"></div>
+            <p class="text-gray-300 mt-4 max-w-2xl mx-auto">Check out some of my recent work and personal projects. Each project represents unique challenges and learning experiences.</p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex justify-center mb-10 flex-wrap gap-3">
+            <button class="px-4 py-2 rounded-full bg-cyan-500 text-white font-medium hover:bg-cyan-600 transition-all">All Projects</button>
+            
+        </div>
+
+        <!-- Projects Grid with staggered animation -->
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project Card 1 -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 shadow-lg rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-cyan-500/20 hover:shadow-xl border border-gray-700 hover:border-cyan-400 relative">
+                <div class="relative overflow-hidden">
+                    <img src="Assets/gresik.outboundpaggora.online_(Nest Hub Max) (1).png" alt="outbound gresik" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">Outbound Gresik</h4>
+                        <span class="px-3 py-1 bg-cyan-500 text-xs font-bold rounded-full text-white">Web</span>
+                    </div>
+                    <p class="mt-3 text-gray-300 mb-4">A dynamic outbound website built with WordPress and Elementor, combining technology and adventure to deliver a seamless and engaging outdoor experience in Gresik.</p>
+                    
+                    <!-- Added Website Link with Icon -->
+                    <a href="https://gresik.outboundpaggora.online" target="_blank" class="mt-2 inline-flex items-center text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-cyan-500/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9" />
+                        </svg>
+                        Visit Website
+                    </a>
+                    
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
+                        <div class="flex space-x-3">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                WordPress
+                            </span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                Elementor
+                            </span>
+                        </div>
+                        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Card 2 -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 shadow-lg rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-cyan-500/20 hover:shadow-xl border border-gray-700 hover:border-cyan-400 relative">
+                <div class="relative overflow-hidden">
+                    <img src="Assets/dev-skyhelang.pantheonsite.io_(Nest Hub Max).png" alt="Jasa Pembuatan Website" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
+                    <!-- Added Featured Badge -->
+                    <div class="absolute top-4 right-4">
+                        <span class="px-3 py-1 bg-yellow-500 text-xs font-bold rounded-full text-white shadow-lg">Featured</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">Jasa Pembuatan Website</h4>
+                        <span class="px-3 py-1 bg-cyan-500 text-xs font-bold rounded-full text-white">Web</span>
+                    </div>
+                    <p class="mt-3 text-gray-300 mb-4">A professional website development service built with WordPress and Elementor, combining technology and creativity to deliver seamless, high-quality, and customized web solutions.</p>
+                    
+                    <!-- Added Website Link with Icon -->
+                    <a href="https://dev-skyhelang.pantheonsite.io" target="_blank" class="mt-2 inline-flex items-center text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-cyan-500/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9" />
+                        </svg>
+                        Visit Website
+                    </a>
+                    
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
+                        <div class="flex space-x-3">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                WordPress
+                            </span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                Elementor
+                            </span>
+                        </div>
+                        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Project Card 1 -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 shadow-lg rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-cyan-500/20 hover:shadow-xl border border-gray-700 hover:border-cyan-400 relative">
+                <div class="relative overflow-hidden">
+                    <img src="Assets/techno.jpg" alt="Technotainment" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">Technotainment</h4>
+                        <span class="px-3 py-1 bg-cyan-500 text-xs font-bold rounded-full text-white">Web</span>
+                    </div>
+                    <p class="mt-3 text-gray-300 mb-4">A seamless competition website for event info, registration, and admin management for Mobile Legends, UI/UX, PES, and more.</p>
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
+                        <div class="flex space-x-3">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                Laravel
+                            </span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                Tailwind
+                            </span>
+                        </div>
+                        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Card 2 -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 shadow-lg rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-cyan-500/20 hover:shadow-xl border border-gray-700 hover:border-cyan-400 relative">
+                <div class="relative overflow-hidden">
+                    <img src="Assets/forecast.jpg" alt="Forecasting" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">Forecasting with Decomposition Methods</h4>
+                        <span class="px-3 py-1 bg-purple-500 text-xs font-bold rounded-full text-white">Data</span>
+                    </div>
+                    <p class="mt-3 text-gray-300 mb-4">A data analysis project implementing decomposition methods for accurate time-series forecasting and prediction.</p>
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
+                        <div class="flex space-x-3">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                PHP
+                            </span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                JavaScript
+                            </span>
+                        </div>
+                        <a href="https://github.com/indraKurniawan555/Forecasting-Metode-Dekomposisi" class="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Card 3 -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 shadow-lg rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-cyan-500/20 hover:shadow-xl border border-gray-700 hover:border-cyan-400 relative">
+                <div class="relative overflow-hidden">
+                    <img src="Assets/budaya.jpg" alt="Aplikasi Budaya Indonesia" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">Mobile Aplication Budaya Indonesia</h4>
+                        <span class="px-3 py-1 bg-green-500 text-xs font-bold rounded-full text-white">Mobile</span>
+                    </div>
+                    <p class="mt-3 text-gray-300 mb-4">A comprehensive mobile application showcasing Indonesia's rich cultural heritage through interactive experiences.</p>
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
+                        <div class="flex space-x-3">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                Kotlin
+                            </span>
+                        </div>
+                        <a href="https://github.com/indraKurniawan555/Aplikasi-Mobile-Budaya-" class="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Card 4 -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 shadow-lg rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-cyan-500/20 hover:shadow-xl border border-gray-700 hover:border-cyan-400 relative">
+                <div class="relative overflow-hidden">
+                    <img src="Assets/topup.jpg" alt="Website Top Up Game" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
+                    <!-- Hot badge
+                    <div class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd" />
+                        </svg>
+                        HOT
+                    </div> -->
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">Top Up Game</h4>
+                        <span class="px-3 py-1 bg-cyan-500 text-xs font-bold rounded-full text-white">Web</span>
+                    </div>
+                    <p class="mt-3 text-gray-300 mb-4">A secure and user-friendly platform for gamers to purchase game Items.</p>
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
+                        <div class="flex space-x-3">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                MySQL
+                            </span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                PHP
+                            </span>
+                        </div>
+                        <a href="https://github.com/indraKurniawan555/Website-Top-Up-Game" class="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Card 5 -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 shadow-lg rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-cyan-500/20 hover:shadow-xl border border-gray-700 hover:border-cyan-400 relative">
+                <div class="relative overflow-hidden">
+                    <img src="Assets/pengajian.jpg" alt="Sistem Informasi Gaji" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">Employee Payroll Management System</h4>
+                        <span class="px-3 py-1 bg-orange-500 text-xs font-bold rounded-full text-white">System</span>
+                    </div>
+                    <p class="mt-3 text-gray-300 mb-4">A comprehensive employee payroll management system with automated calculations, reporting, and secure data management.</p>
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
+                        <div class="flex space-x-3">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                PHP
+                            </span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                MySQL
+                            </span>
+                        </div>
+                        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Project Card 6 -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 shadow-lg rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-cyan-500/20 hover:shadow-xl border border-gray-700 hover:border-cyan-400 relative">
+                <div class="relative overflow-hidden">
+                    <img src="Assets/rekomendasi.jpg" alt="Recomendation System" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">Recomendation System Using Collaborative Filtering </h4>
+                        <span class="px-3 py-1 bg-orange-500 text-xs font-bold rounded-full text-white">System</span>
+                    </div>
+                    <p class="mt-3 text-gray-300 mb-4">A collaborative filtering-based recommendation system for Jember tourism, offering personalized travel suggestions.</p>
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
+                        <div class="flex space-x-3">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                Python
+                            </span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                Streamlit
+                            </span>
+                        </div>
+                        <a href="https://github.com/indraKurniawan555/Sistem-Rekomendasi-dengan-User-Based-Collaborative-Filltering" class="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project Card 6 -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 shadow-lg rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-cyan-500/20 hover:shadow-xl border border-gray-700 hover:border-cyan-400 relative">
+                <div class="relative overflow-hidden">
+                    <img src="Assets/website simalik.jpg" alt="SIMALIK" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">Website SIMALIK</h4>
+                        <span class="px-3 py-1 bg-yellow-500 text-xs font-bold rounded-full text-white">UI/UX</span>
+                    </div>
+                    <p class="mt-3 text-gray-300 mb-4">UI/UX design for SIMALIK kota Kediri, ensuring intuitive navigation and seamless access to public services.</p>
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
+                        <div class="flex space-x-3">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                Figma
+                            </span>
+                        </div>
+                        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Project Card 6 -->
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 shadow-lg rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-cyan-500/20 hover:shadow-xl border border-gray-700 hover:border-cyan-400 relative">
+                <div class="relative overflow-hidden">
+                    <img src="Assets/kediri kota.jpg" alt="Kediri Kota" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">Website Kediri Kota</h4>
+                        <span class="px-3 py-1 bg-yellow-500 text-xs font-bold rounded-full text-white">UI/UX</span>
+                    </div>
+                    <p class="mt-3 text-gray-300 mb-4">UI/UX design for the Kediri Kota website, ensuring a modern interface, easy navigation, and smooth access to city information and public services.</p>
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
+                        <div class="flex space-x-3">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                Figma
+                            </span>
+                        </div>
+                        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 shadow-lg rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-cyan-500/20 hover:shadow-xl border border-gray-700 hover:border-cyan-400 relative">
+                <div class="relative overflow-hidden">
+                    <img src="Assets/confusion matrix.jpg" alt="Confusion Matrix" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <h4 class="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">Chili Image Classification Using CNN Method</h4>
+                        <span class="px-3 py-1 bg-purple-500 text-xs font-bold rounded-full text-white">Data</span>
+                    </div>
+                    <p class="mt-3 text-gray-300 mb-4">A deep learning-based system using CNN to classify chili images based on ripeness, quality, and type for agricultural analysis and quality control.</p>
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
+                        <div class="flex space-x-3">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-700 text-gray-300">
+                                Python
+                            </span>
+                        </div>
+                        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+    </div>
+    
+        <div class="mt-16 text-center">
+            <a href="#" class="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-cyan-500/30 group">
+                View More Projects
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </a>
+        </div>
+    
+
+    <!-- Floating Decorative Elements - Animated dots -->
+    <div class="absolute top-20 left-10 w-4 h-4 bg-cyan-500 rounded-full opacity-20 animate-pulse"></div>
+    <div class="absolute top-40 right-20 w-6 h-6 bg-blue-500 rounded-full opacity-20 animate-pulse animation-delay-500"></div>
+    <div class="absolute bottom-20 left-1/4 w-5 h-5 bg-purple-500 rounded-full opacity-20 animate-pulse animation-delay-1000"></div>
+    
+    <!-- Add this to your CSS -->
+    <style>
+        .animation-delay-500 {
+            animation-delay: 500ms;
+        }
+        .animation-delay-1000 {
+            animation-delay: 1000ms;
+        }
+    </style>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Get all project cards
+    const projectCards = document.querySelectorAll('.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-8 > div');
+    
+    // Get the "View More Projects" button
+    const viewMoreButton = document.querySelector('.mt-16.text-center a');
+    
+    // Get the button text and icon elements
+    const buttonTextElement = viewMoreButton.childNodes[0];
+    const originalButtonText = buttonTextElement.textContent.trim();
+    const buttonIcon = viewMoreButton.querySelector('svg');
+    
+    // Variable to track the current state
+    let showingAll = false;
+    
+    // Initially hide all projects except the first 3
+    if (projectCards.length > 3) {
+        for (let i = 3; i < projectCards.length; i++) {
+            projectCards[i].style.display = 'none';
+        }
+    }
+    
+    // Add click event listener to the button
+    viewMoreButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default anchor behavior
+        
+        if (!showingAll) {
+            // Show all hidden project cards
+            for (let i = 3; i < projectCards.length; i++) {
+                projectCards[i].style.display = 'block';
+                
+                // Add a fade-in animation
+                projectCards[i].style.opacity = '0';
+                projectCards[i].style.transform = 'translateY(20px)';
+                
+                // Trigger a reflow
+                void projectCards[i].offsetWidth;
+                
+                // Add transition
+                projectCards[i].style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                projectCards[i].style.opacity = '1';
+                projectCards[i].style.transform = 'translateY(0)';
+            }
+            
+            // Change button text to "Show Less"
+            buttonTextElement.textContent = "Show Less";
+            
+            // Flip the icon direction (pointing up instead of right)
+            buttonIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />';
+            
+            // Update state
+            showingAll = true;
+            
+        } else {
+            // Hide projects beyond the first 3
+            for (let i = 3; i < projectCards.length; i++) {
+                // Add a fade-out animation
+                projectCards[i].style.opacity = '0';
+                projectCards[i].style.transform = 'translateY(20px)';
+                
+                // Actually hide the element after the animation completes
+                setTimeout(function() {
+                    projectCards[i].style.display = 'none';
+                }, 500);
+            }
+            
+            // Change button text back to original
+            buttonTextElement.textContent = originalButtonText;
+            
+            // Reset the icon direction
+            buttonIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />';
+            
+            // Update state
+            showingAll = false;
+            
+            // Scroll back to the projects section
+            document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+</script>
+
+<!-- Add this script at the end of your body tag -->
+<script>
+    // Optional JavaScript for enhanced interactions
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animation for project cards on scroll
+        const projectCards = document.querySelectorAll('#projects .grid > div');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        projectCards.forEach(card => {
+            card.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700');
+            observer.observe(card);
+        });
+    });
+</script>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-slate-800 text-white">
+        <div class="container mx-auto px-6">
+            <h3 class="text-3xl font-bold text-center text-cyan-400">Contact Me</h3>
+            <form class="mt-8 max-w-lg mx-auto space-y-4" action="https://formspree.io/f/xrbbdvpv" method="POST">
+                <input type="text" placeholder="Your Name" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded focus:outline-none focus:ring-2 focus:ring-cyan-400 text-white">
+                <input type="email" placeholder="Your Email" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded focus:outline-none focus:ring-2 focus:ring-cyan-400 text-white">
+                <textarea placeholder="Your Message" rows="4" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded focus:outline-none focus:ring-2 focus:ring-cyan-400 text-white"></textarea>
+                <button type="submit" class="w-full bg-cyan-400 hover:bg-cyan-300 text-black py-2 px-4 rounded transition-colors">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-6">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 Indra Kurniawan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const texts = ["Web Developer. ", "Machine Learning. ", "Fullstack. "]; // Array teks
+        const typingElement = document.getElementById("typing-effect");
+        let textIndex = 0; // Index teks dalam array
+        let charIndex = 0; // Index karakter dalam teks
+        let isDeleting = false; // Menandakan apakah sedang menghapus teks
+        const typingSpeed = 150; // Kecepatan mengetik (ms)
+        const deletingSpeed = 100; // Kecepatan menghapus (ms)
+        const delayBetweenTexts = 1000; // Waktu jeda antar teks (ms)
+        const delayAfterAllTexts = 2000; // Waktu jeda setelah semua teks selesai (ms)
+
+        function typeEffect() {
+            const currentText = texts[textIndex]; // Ambil teks yang sedang diproses
+
+            if (isDeleting) {
+                // Menghapus teks
+                typingElement.textContent = currentText.substring(0, charIndex--);
+            } else {
+                // Mengetik teks
+                typingElement.textContent = currentText.substring(0, charIndex++);
+            }
+
+            // Jika teks selesai diketik
+            if (!isDeleting && charIndex === currentText.length) {
+                isDeleting = true;
+                setTimeout(typeEffect, delayBetweenTexts); // Tunggu sebelum mulai menghapus
+            }
+            // Jika teks selesai dihapus
+            else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+
+                // Periksa apakah ini adalah teks terakhir
+                if (textIndex === texts.length - 1) {
+                    setTimeout(() => {
+                        textIndex = 0; // Kembali ke teks pertama
+                        typeEffect();
+                    }, delayAfterAllTexts); // Tunggu lebih lama sebelum memulai ulang
+                } else {
+                    textIndex = (textIndex + 1) % texts.length; // Pindah ke teks berikutnya
+                    setTimeout(typeEffect, typingSpeed); // Mulai mengetik teks baru
+                }
+            }
+            // Lanjut mengetik atau menghapus
+            else {
+                setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
+            }
+        }
+
+        // Mulai efek mengetik
+        typeEffect();
+
+
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        const header = document.querySelector("header");
+        const navLinks = document.querySelectorAll(".nav-link");
+        const navTitle = document.getElementById("nav-title");
+        const heroSection = document.getElementById("hero");
+
+        window.addEventListener("scroll", () => {
+            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+            if (window.scrollY > heroBottom) {
+                header.classList.add("bg-white");
+                header.classList.remove("bg-transparent");
+                navLinks.forEach(link => link.classList.replace("text-white", "text-black"));
+                navTitle.classList.replace("text-white", "text-black");
+            } else {
+                header.classList.add("bg-transparent");
+                header.classList.remove("bg-white");
+                navLinks.forEach(link => link.classList.replace("text-black", "text-white"));
+                navTitle.classList.replace("text-black", "text-white");
+            }
+        });
+        // Create the network animation when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        const networkCanvas = document.getElementById('network-animation');
+        
+        // Create canvas element
+        const canvas = document.createElement('canvas');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        canvas.style.display = 'block';
+        networkCanvas.appendChild(canvas);
+        
+        const ctx = canvas.getContext('2d');
+        
+        // Set up the pentagon network
+        const particles = [];
+        const particleCount = 100;
+        const connectionDistance = 150;
+        const colors = ['rgba(6, 182, 212, 0.5)', 'rgba(20, 184, 166, 0.5)', 'rgba(255, 255, 255, 0.3)'];
+        
+        // Create particles
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 3 + 1,
+                speedX: (Math.random() - 0.5) * 0.5,
+                speedY: (Math.random() - 0.5) * 0.5,
+                color: colors[Math.floor(Math.random() * colors.length)]
+            });
+        }
+        
+        // Animation function
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Update and draw particles
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                
+                // Move particles
+                p.x += p.speedX;
+                p.y += p.speedY;
+                
+                // Bounce off edges
+                if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+                
+                // Draw particle
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Connect particles that are close enough
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dx = p.x - p2.x;
+                    const dy = p.y - p2.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < connectionDistance) {
+                        ctx.strokeStyle = `rgba(6, 182, 212, ${0.2 * (1 - distance / connectionDistance)})`;
+                        ctx.lineWidth = 1 * (1 - distance / connectionDistance);
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+        
+        // Start animation
+        animate();
+        
+        // Resize canvas when window size changes
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    });
+
+    </script>
+</body>
+</html>
